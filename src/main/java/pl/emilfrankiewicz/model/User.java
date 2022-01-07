@@ -29,7 +29,7 @@ public class User {
 		this.creationDate = creationDate;
 	}
 
-	public Long getId() {
+	public Long userDTO() {
 		return id;
 	}
 
