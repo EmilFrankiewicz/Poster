@@ -1,11 +1,16 @@
 package pl.emilfrankiewicz.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -18,18 +23,14 @@ public class User {
 	private String password;
 	private Date creationDate;
 
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Set<UserRole> roles;
+
 	public User() {
+		setRoles(new HashSet<>());
 	}
 
-	public User(Long id, String username, String email, String password, Date creationDate) {
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.creationDate = creationDate;
-	}
-
-	public Long userDTO() {
+	public Long getId() {
 		return id;
 	}
 
@@ -67,6 +68,14 @@ public class User {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 }
