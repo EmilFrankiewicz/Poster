@@ -9,4 +9,5 @@ import pl.emilfrankiewicz.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	boolean existsUserByUsername(String username);
 	boolean existsUserByEmail(String email);
+	User findByUsername(String username);
 }
